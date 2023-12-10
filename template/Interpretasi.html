@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>Interpretasi - SignLingoID</title>
+</head>
+<body>
+    <div class="background">
+        <div class="header">
+            <img src="../static/image/Header logo2.png" class="header-logo" width="100 px" height="50 px">
+            <ul>
+                <li><a href="#">Beranda</a></li>
+                <a href="#"><button>Interpretasi</button></a>
+                <li><a href="#">Tentang</a></li>
+                <li><a href="#">Lainnya</a></li>
+            </ul>
+        </div>
+        <div class="interpretasi-content">
+            <video id="camera" width="448" autoplay></video>
+        </div>
+        <div class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-col">
+                        <p style="color: #ffde59;">SIGNLINGOID</p>
+                        <br>
+                        <p>
+                            SignLingoID adalah aplikasi web yang inovatif,<br>
+                            mengubah gambar isyarat tangan menjadi<br>
+                            teks, menjadikan komunikasi bahasa isyarat<br>
+                            lebih mudah dan efisien. 
+                        </p>
+                    </div>
+                    <div class="footer-col">
+                        <p style="color: #ffde59;">TEMUKAN KAMI!</p>
+                        <br>
+                        <p>
+                            <img src="../static/image/map-pin.png" class="white-logo" width="15 px" height="15 px">
+                            Jl. Dr. Ir. H. Soekarno, Mulyorejo, Kec.<br> Mulyorejo, Surabaya, Jawa Timur 60115
+                        </p>
+                        <p>
+                            <img src="../static/image/gmail.png" class="white-logo" width="15 px" height="15 px">
+                            SIGNLINGOID@gmail.com
+                        </p>
+                        <p>
+                            <img src="../static/image/phone.png" class="white-logo" width="15 px" height="15 px">
+                            +62 812 3456 7891
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if the browser supports WebRTC
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                // Access the camera
+                navigator.mediaDevices.getUserMedia({ video: true })
+                    .then((stream) => {
+                        const video = document.getElementById('camera');
+                        video.srcObject = stream;
+                    })
+                    .catch((error) => {
+                        console.error('Error accessing camera:', error);
+                    });
+            } else {
+                console.error('WebRTC is not supported in this browser');
+            }
+        });
+    </script>
+</body>
+</html>
