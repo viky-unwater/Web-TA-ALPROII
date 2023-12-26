@@ -3,6 +3,9 @@
     padding: 0;
     font-family: Helvetica;
 }
+body{
+    background-color: #151414;
+}
 .background{
     width: 100%;
     height: 100vh;
@@ -107,6 +110,13 @@
     background-color: #000;
     color: #fff;
     font-size: 14px;
+}
+.social-icons a i {
+    color: white;
+    margin: 0 0.5mm;
+    font-size: 22px; /* Ubah ini untuk mengubah ukuran ikon */
+    position: relative;
+    bottom: 50px; /* Ubah ini untuk mengatur posisi vertikal ikon */
 }   
 .row{
     display: flex;
