@@ -17,7 +17,12 @@
             </ul>
         </div>
         <div class="interpretasi-content">
-            <video id="camera" width="448px" height="auto" autoplay></video>
+            <img src="{{ url_for('video_feed') }}" width="720px" height="auto">
+            <div class="interpret-co">
+                <h1>Interpretasi Bahasa</h1>
+                <textarea id="predictionTextarea" rows="10" cols="30"></textarea>
+            </div>
+            
         </div>
         <div class="footer">
             <div class="social-icons" style="display: flex; justify-content: center; align-items: center;">
@@ -59,20 +64,17 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Check if the browser supports WebRTC
-            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-                // Access the camera
-                navigator.mediaDevices.getUserMedia({ video: true })
-                    .then((stream) => {
-                        const video = document.getElementById('camera');
-                        video.srcObject = stream;
+            // Periodically update predictions every 3 seconds
+            setInterval(() => {
+                fetch('/get_prediction')
+                    .then(response => response.json())
+                    .then(data => {
+                        const predictionTextarea = document.getElementById('predictionTextarea');
+                        // Clear the existing text in the textarea and update with the latest predictions
+                        predictionTextarea.value = data.prediction_list.join('\n');
                     })
-                    .catch((error) => {
-                        console.error('Error accessing camera:', error);
-                    });
-            } else {
-                console.error('WebRTC is not supported in this browser');
-            }
+                    .catch(error => console.error('Error fetching prediction:', error));
+            }, 3000);
         });
     </script>
 </body>

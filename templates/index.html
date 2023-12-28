@@ -2,11 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hand Classification</title>
+    <title>Hand Gesture Prediction</title>
 </head>
 <body>
-    <h1>Hand Classification</h1>
-    <img src="{{ url_for('video_feed') }}" alt="Video Feed">
+    <h1>Hand Gesture Prediction</h1>
+    <img src="{{ url_for('video_feed') }}" width="640" height="480" style="border: 1px solid black;">
+    <textarea id="predictions" rows="10" cols="50" readonly></textarea>
+    <script>
+        function updatePredictions() {
+            fetch('/predictions')
+                .then(response => response.text())
+                .then(predictions => {
+                    document.getElementById('predictions').value = predictions;
+                    setTimeout(updatePredictions, 1000);  // Update every second
+                });
+        }
+
+        updatePredictions();  // Start updating predictions
+    </script>
 </body>
 </html>
